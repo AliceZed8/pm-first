@@ -2,73 +2,87 @@
 #include <vector>
 #include <string>
 
-class BInt {
+class BInt
+{
     private:
         std::vector<int> number;
+
     public:
-        BInt() {
+        BInt()
+        {
             number.resize(1);
             number[0] = 0;
         }
-        BInt(std::string s) {
-            for (int i = s.length() - 1; i >= 0; i--) {
+        BInt(std::string s)
+        {
+            for (int i = s.length() - 1; i >= 0; i--)
+            {
                 number.push_back(s[i] - '0');
             }
         }
-        BInt(std::vector <int> nw) {
+        BInt(std::vector<int> nw)
+        {
             this->number = nw;
         }
 
-        void print() {
-            for (int i = number.size() - 1; i >= 0; i--) {
+        void print()
+        {
+            for (int i = number.size() - 1; i >= 0; i--)
+            {
                 std::cout << number[i];
             }
             std::cout << "\n";
         }
 
-        void print_r() {
-            for (int i = 0; i < number.size(); i++) {
-                std::cout << number[i];
-            }
-            std::cout << "\n";
+        void add_zero(int k) {
+            for (int i =0; i < k; i++) this->number.insert(this->number.begin(), 0);
         }
 
-        void add_zero(int n) {
-            for (int i = 0; i < n; i++) this->number.insert(this->number.begin(), 0);
-       
-        }
+        BInt operator * (int k)
+        {
+            std::vector<int> res;
 
-        BInt operator + (BInt A) {
-            std::vector <int> res;
-            res.resize(std::max(this->number.size(), A.number.size()));
             int t = 0;
-            for (int i = 0; i < std::max(this->number.size(), A.number.size()); i++) {
+            for (int i = 0; i < this->number.size(); i++)
+            {
+                res.push_back((this->number[i] * k + t) % 10);
+                t = (this->number[i] * k + t) / 10;
+            }
+            if (t != 0)
+                res.push_back(t);
+
+            BInt c(res);
+            return c;
+        }
+
+        BInt operator + (BInt A)
+        {
+            std::vector<int> res;
+            if (this->number.size() >= A.number.size())
+            {
+                res.resize(this->number.size());
+                A.number.resize(this->number.size());
+            }
+            else
+            {
+                res.resize(A.number.size());
+                this->number.resize(A.number.size());
+            }
+            int t = 0;
+            for (int i = 0; i < std::max(this->number.size(), A.number.size()); i++)
+            {
                 res[i] = (this->number[i] + A.number[i] + t) % 10;
                 t = (this->number[i] + A.number[i] + t) / 10;
             }
-            if (t > 0) res.push_back(t);
+            if (t > 0)
+                res.push_back(t);
             BInt c(res);
             return c;
         }
-        //a * k
-        BInt operator * (int k) {
-            std::vector <int> res;
-            res.resize(this->number.size());
-            int t = 0;
-            for (int i = 0; i < this->number.size(); i++) {
-                res[i] = (this->number[i] * k + t) % 10;
-                t = (this->number[i] * k + t) / 10;
-            }
 
-            if (t != 0) res.push_back(t);
-            BInt c (res);
-            return c;
-        }
-        // a * b
-        BInt operator * (BInt A) {
-            std::vector <int> res;
-            res.resize(this->number.size() + A.number.size());
-            BInt c(res);
+        BInt operator * (BInt A)
+        {
+            BInt c;
             if (this->number.size() >= A.number.size()) {
                 BInt BIG(this->number);
                 for (int i = 0; i < A.number.size(); i++) {
@@ -88,14 +102,16 @@ class BInt {
 
             return c;
         }
+    };
 
-};
+int main()
+{ 
+    std::string a, b;
+    std::cin >> a >> b;
+    BInt num1(a);
+    BInt num2(b);
+    BInt num3 = num1 * num2;
+    num3.print();
 
-
-int main() {
-    BInt a("9999");
-    BInt b("1110");
-    BInt c = a * b;
-    c.print();
-
+    //std::cout << std::stoi(a) * std::stoi(b) << std::endl;
 }
