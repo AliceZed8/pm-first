@@ -28,7 +28,6 @@ void Camera::draw() {
     }
     m_renderWindow.draw(m_camera);
 }
-
 void Camera::update() {
     sf::Time dt = m_clock.restart();
     checkKeyboardHit(dt);
