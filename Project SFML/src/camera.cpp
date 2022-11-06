@@ -3,7 +3,7 @@
 Camera::Camera(sf::RenderWindow& renderWindow, Map& map):
     m_renderWindow(renderWindow), m_map(map)
 {
-    m_radius = 5;
+    m_radius = 1;
     m_camera.setRadius(m_radius);
     m_camera.setFillColor(sf::Color::Green);
     m_camera.setOrigin(sf::Vector2f(m_radius, m_radius));
@@ -12,7 +12,7 @@ Camera::Camera(sf::RenderWindow& renderWindow, Map& map):
     m_angle = 0.0f;
     m_position = sf::Vector2f({128, 128});
     m_fov = 60;
-    m_rayLength = 200;
+    m_rayLength = 100;
 
     for (unsigned int i = 0; i < WIDTH; i++) {
         sf::VertexArray ray(sf::Lines, 2);
@@ -50,13 +50,17 @@ void Camera::projection() {
 
 void Camera::checkKeyboardHit(sf::Time dt) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        m_position.x += getCos(m_angle)*m_speedMove*dt.asSeconds();
-        m_position.y += getSin(m_angle)*m_speedMove*dt.asSeconds();
+        if (!(m_map.checkMapCase((m_position.x + getCos(m_angle)*m_speedMove*dt.asSeconds())/blockSize, (m_position.y + getSin(m_angle)*m_speedMove*dt.asSeconds())/blockSize))) {
+            m_position.x += getCos(m_angle)*m_speedMove*dt.asSeconds();
+            m_position.y += getSin(m_angle)*m_speedMove*dt.asSeconds();
+        }
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        m_position.x -= getCos(m_angle)*m_speedMove*dt.asSeconds();
-        m_position.y -= getSin(m_angle)*m_speedMove*dt.asSeconds();
+        if (!(m_map.checkMapCase((m_position.x - getCos(m_angle)*m_speedMove*dt.asSeconds())/blockSize, (m_position.y - getSin(m_angle)*m_speedMove*dt.asSeconds())/blockSize))) {
+            m_position.x -= getCos(m_angle)*m_speedMove*dt.asSeconds();
+            m_position.y -= getSin(m_angle)*m_speedMove*dt.asSeconds();
+        }
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {

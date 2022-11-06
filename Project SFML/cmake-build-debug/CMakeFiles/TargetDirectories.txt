@@ -1,0 +1,3 @@
+/home/alicezed/Рабочий стол/std/Project SFML/cmake-build-debug/CMakeFiles/Project_SFML.dir
+/home/alicezed/Рабочий стол/std/Project SFML/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/alicezed/Рабочий стол/std/Project SFML/cmake-build-debug/CMakeFiles/rebuild_cache.dir

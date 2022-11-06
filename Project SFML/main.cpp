@@ -4,7 +4,7 @@
 #include "src/map.cpp"
 
 int main () {
-    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML", sf::Style::Titlebar);
+    sf::RenderWindow window(sf::VideoMode(WIDTH*4, HEIGHT*4), "SFML", sf::Style::Titlebar);
     window.setFramerateLimit(60);
     Map _map (window);
     Camera cam(window, _map);
