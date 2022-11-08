@@ -1,0 +1,3 @@
+/home/alicezed/Рабочий стол/std/Project/cmake-build-debug/CMakeFiles/Project.dir
+/home/alicezed/Рабочий стол/std/Project/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/alicezed/Рабочий стол/std/Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
