@@ -1,5 +1,0 @@
-/snap/clion/209/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/209/bin/ninja/linux/ninja -G Ninja -S "/home/alicezed/Рабочий стол/std/Project SFML" -B "/home/alicezed/Рабочий стол/std/Project SFML/cmake-build-debug"
--- Found SFML 2.5.1 in /home/alicezed/Рабочий стол/std/Project SFML/SFML/lib/cmake/SFML
--- Configuring done
--- Generating done
--- Build files have been written to: /home/alicezed/Рабочий стол/std/Project SFML/cmake-build-debug
