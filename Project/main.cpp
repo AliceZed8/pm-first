@@ -1,11 +1,13 @@
 #include <SFML/Graphics.hpp>
+#include "inc/settings.hpp"
+#include "src/map.cpp"
+#include "src/camera.cpp"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-
+    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML works!");
+    Map m_map(window);
+    Camera cam(window, m_map);
     while (window.isOpen())
     {
         sf::Event event;
@@ -13,10 +15,14 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            if (event.key.code == sf::Keyboard::Escape) window.close();
         }
 
         window.clear();
-        window.draw(shape);
+        cam.update();
+        cam.draw_blocks();
+        m_map.draw();
+        cam.draw_other();
         window.display();
     }
 
