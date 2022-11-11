@@ -5,7 +5,7 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), L"Псевдо 3D");
     Map m_map(window);
     Camera cam(window, m_map);
     while (window.isOpen())

@@ -6,9 +6,9 @@ Camera::Camera(sf::RenderWindow &window, Map &m_map):
         angle = 0;
         fov = 60;
         ray_length = 300.0f;
-        move_speed = 50.0f;
+        move_speed = 25.0f;
         sensivity = 1.0f;
-        sens_speed = 100.0f;
+        sens_speed = 50.0f;
         radius = 3.0f;
         camera.setRadius(radius);
         camera.setOrigin(sf::Vector2f(radius, radius));
