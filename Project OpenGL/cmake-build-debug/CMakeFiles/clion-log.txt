@@ -1,0 +1,6 @@
+/snap/clion/209/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/209/bin/ninja/linux/ninja -G Ninja -S "/home/alicezed/Рабочий стол/pm-first-main/Project OpenGL" -B "/home/alicezed/Рабочий стол/pm-first-main/Project OpenGL/cmake-build-debug"
+-- Checking for module 'glut'
+--   No package 'glut' found
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/alicezed/Рабочий стол/pm-first-main/Project OpenGL/cmake-build-debug
