@@ -1,3 +1,3 @@
-/home/alicezed/Рабочий стол/pm-first-main/Praktika/p3/cmake-build-debug/CMakeFiles/p3.dir
-/home/alicezed/Рабочий стол/pm-first-main/Praktika/p3/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/alicezed/Рабочий стол/pm-first-main/Praktika/p3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/alicezed/Рабочий стол/pm-first/Praktika/p3/cmake-build-debug/CMakeFiles/p3.dir
+/home/alicezed/Рабочий стол/pm-first/Praktika/p3/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/alicezed/Рабочий стол/pm-first/Praktika/p3/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,6 +1,8 @@
 #include <GL/glut.h>
+#include <GLFW/glfw3.h>
 #include <unistd.h>
 #include <cmath>
+#include <iostream>
 
 float vert[] = {1,1,0 ,  1,-1,0,  -1,-1,0, -1, 1,0};
 float xAlfa = 20;
@@ -10,8 +12,15 @@ float speed = 0;
 float temp_angle = 0;
 const float pi = 3.14159265358979;
 
+
+void specKey(int key, int x, int y) {
+
+}
+
+
 void pressKey(unsigned char key, int x, int y){
     temp_angle = (-zAlfa * pi) / 180;
+    std::cout << key << std::endl;
     switch (key) {
         case 'w':
             if (xAlfa < 178) {
@@ -48,13 +57,12 @@ void pressKey(unsigned char key, int x, int y){
 
     }
 
-
 }
 void ShowWorld() {
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_FLOAT, 0 , &vert);
-    for (int i = -5; i < 5; i++) {
-        for (int j = -5; j < 5; j++) {
+    for (int i = -10; i < 10; i++) {
+        for (int j = -10; j < 10; j++) {
             glPushMatrix();
             if ((i+j)%2 == 0) glColor3f(0,0.5,0);
             else glColor3f(1,1,1);

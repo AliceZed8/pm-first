@@ -1,4 +1,4 @@
-# Install script for directory: /home/alicezed/Рабочий стол/pm-first-main/Project OpenGL
+# Install script for directory: /home/alicezed/Рабочий стол/pm-first/Project OpenGL
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/alicezed/Рабочий стол/pm-first-main/Project OpenGL/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/alicezed/Рабочий стол/pm-first/Project OpenGL/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

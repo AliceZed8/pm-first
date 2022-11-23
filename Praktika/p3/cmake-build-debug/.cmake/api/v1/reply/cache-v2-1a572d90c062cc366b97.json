@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/alicezed/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/pm-first-main/Praktika/p3/cmake-build-debug"
+			"value" : "/home/alicezed/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/pm-first/Praktika/p3/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -591,7 +591,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/alicezed/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/pm-first-main/Praktika/p3"
+			"value" : "/home/alicezed/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/pm-first/Praktika/p3"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1123,7 +1123,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/alicezed/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/pm-first-main/Praktika/p3/cmake-build-debug"
+			"value" : "/home/alicezed/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/pm-first/Praktika/p3/cmake-build-debug"
 		},
 		{
 			"name" : "p3_IS_TOP_LEVEL",
@@ -1147,7 +1147,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/alicezed/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/pm-first-main/Praktika/p3"
+			"value" : "/home/alicezed/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/pm-first/Praktika/p3"
 		}
 	],
 	"kind" : "cache",
