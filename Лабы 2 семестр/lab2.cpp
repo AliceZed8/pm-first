@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 
 
 class Allocator {
@@ -21,6 +21,14 @@ public:
         char* result = allocate(bytes_count);
         if (result != nullptr) {
             std::copy(start, start + strlen(start) + 1, result);
+        }
+        return result;
+    }
+
+    char* reallocate(char*& start, size_t length, size_t bytes_count) {
+        char* result = allocate(bytes_count);
+        if (result != nullptr) {
+            std::copy(start, start + length, result);
         }
         return result;
     }
@@ -57,7 +65,7 @@ public:
         arr = allocator->reallocate(str, cap);
        
     }
-    
+
     //Empty Constructor
     String(size_t n = 20) {
         size = 0;
@@ -70,7 +78,7 @@ public:
         size = str.length();
         cap = size + 1;
         char* p1 = str.c_str();
-        arr = allocator->reallocate(p1, cap);
+        arr = allocator->reallocate(p1, size + 1, cap);
     }
 
     //Destructor
@@ -117,7 +125,7 @@ public:
         else {
             cap = size + 200;
             char* old_arr = arr;
-            arr = allocator->reallocate(old_arr, cap);
+            arr = allocator->reallocate(old_arr, old_length + 1, cap);
             delete[] old_arr;
             std::copy(str.c_str(), str.c_str() + str.length() + 1, arr + old_length);
         }
@@ -131,7 +139,7 @@ public:
 
         if (n > old_length) {
             cap = n;
-            arr = allocator->reallocate(old_arr, cap);
+            arr = allocator->reallocate(old_arr, size + 1,  cap);
             delete[] old_arr;
         }
         else if (n < old_length) {
@@ -183,15 +191,10 @@ int main()
 {
     String a("Hello");
     String b = a;
+    b += "h" + String("BCA") + "HELLO WORLD" + a;
 
-    b += "Hello" + a + "das";
-    int i = b.find('l');
-    
-    printf("%s %zd %zd %d\n", b.c_str(), b.capacity(), b.length(), i);
 
-    String c = "Hello";
-    b += "\n Some text" + c + "))))";
-    i = b.find('S');
-    printf("%s %zd %zd %d", b.c_str(), b.capacity(), b.length(), i);
+    printf("%s %zd %zd %d\n", b.c_str(), b.capacity(), b.length(), sizeof(b));
+
 }
 
