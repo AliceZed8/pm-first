@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 
 
 class Allocator {
@@ -24,15 +24,6 @@ public:
         }
         return result;
     }
-
-    char* reallocate(char* &start, size_t bytes_count) {
-        char* result = allocate(bytes_count);
-        if (result != nullptr) {
-            std::copy(start, start + strlen(start) + 1, result);
-        }
-        return result;
-    }
-
 };
 
 
