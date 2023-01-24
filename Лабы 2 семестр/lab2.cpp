@@ -11,7 +11,7 @@ public:
             return result;
         }
         catch (const std::bad_alloc& e) {
-            printf("Memory Allocation FAILED %s \n", e.what());
+            printf("Memory Allocation FAILED: %s \n", e.what());
             return nullptr;
         }
 
@@ -178,6 +178,7 @@ std::ostream& operator << (std::ostream& out, String& str) {
 }
 std::istream& operator >> (std::istream& out, String& str) {
     out >> str.c_str();
+    str.size = strlen(str.c_str());
     return out;
 }
 
@@ -189,12 +190,23 @@ String operator + (String str1, String str2) {
 
 int main()
 {
-    String a("Hello");
+
+    Allocator allocator;
+
+    char* arr = allocator.allocate(10000000000000);
+
+
+    String a("HELLO");
     String b = a;
-    b += "h" + String("BCA") + "HELLO WORLD" + a;
+    b += " WORLD " +  a + "HELLO" + "dadsa";
+    b += " WORLD";
+    printf("%s %zd %zd %zd\n", b.c_str(), b.capacity(), b.length(), sizeof(b));
+    
+    std::cin >> b;
+
+    printf("%s %zd %zd %zd\n", b.c_str(), b.capacity(), b.length(), sizeof(b));
 
 
-    printf("%s %zd %zd %d\n", b.c_str(), b.capacity(), b.length(), sizeof(b));
 
 }
 
