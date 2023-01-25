@@ -25,10 +25,10 @@ public:
         return result;
     }
 
-    char* reallocate(char*& start, size_t length, size_t bytes_count) {
+    char* reallocate(char*& start, size_t bytes_count) {
         char* result = allocate(bytes_count);
         if (result != nullptr) {
-            std::copy(start, start + length, result);
+            std::copy(start, start + strlen(start) + 1, result);
         }
         return result;
     }
@@ -57,32 +57,50 @@ public:
         return cap;
     }
 
-    //From const char array ( "" )
-    
     String(const char* str) {
+        printf("%s\n", "Const Char* Constructor");
         size = strlen(str);
         cap = size + 1;
         arr = allocator->reallocate(str, cap);
        
     }
+    String(char* str) {
+        printf("%s\n", "Char* Constructor");
+        size = strlen(str);
+        cap = size + 1;
+        arr = allocator->reallocate(str, cap);
+
+    }
 
     //Empty Constructor
     String(size_t n = 20) {
+        printf("%s\n", "Empty Constructor");
         size = 0;
         cap = n + 1;
         arr = allocator->allocate(cap);
     }
 
-    //Copy Constructor
+    //Copy Constructor*
     String(const String & str) {
+        printf("%s\n", "Copy Constructor");
         size = str.length();
         cap = size + 1;
         char* p1 = str.c_str();
-        arr = allocator->reallocate(p1, size + 1, cap);
+        arr = allocator->reallocate(p1, cap);
+    }
+
+    //Copy and Swap
+    String& operator= (String str2) {
+        printf("%s\n", "Copy and Swap");
+        std::swap(size, str2.size);
+        std::swap(cap, str2.cap);
+        std::swap(arr, str2.arr);
+        return *this;
     }
 
     //Destructor
     ~String() {
+        printf("%s\n", "Destructor");
         if (arr != nullptr) {
             delete[] arr;
         }
@@ -92,10 +110,12 @@ public:
 
     //Operator []
     char& operator [] (size_t i) {
+        printf("%s\n", "Operator []");
         return arr[i];
     }
 
     char& at(size_t i) {
+        printf("%s\n", "at() ");
         if (i >= size) throw std::out_of_range("");
         else {
             return arr[i];
@@ -116,6 +136,7 @@ public:
 
     //Add
     void add(const String &str) {
+        printf("%s\n", "add() ");
         size_t old_length = size;
         size += str.length();
 
@@ -125,7 +146,7 @@ public:
         else {
             cap = size + 200;
             char* old_arr = arr;
-            arr = allocator->reallocate(old_arr, old_length + 1, cap);
+            arr = allocator->reallocate(old_arr, cap);
             delete[] old_arr;
             std::copy(str.c_str(), str.c_str() + str.length() + 1, arr + old_length);
         }
@@ -134,12 +155,13 @@ public:
 
     //Resize
     void resize(size_t n) {
+        printf("%s\n", "Resize");
         size_t old_length = size;
         char* old_arr = arr;
 
         if (n > old_length) {
             cap = n;
-            arr = allocator->reallocate(old_arr, size + 1,  cap);
+            arr = allocator->reallocate(old_arr,  cap);
             delete[] old_arr;
         }
         else if (n < old_length) {
@@ -151,12 +173,12 @@ public:
 
     //+= 
     void operator += (String str) {
+        printf("%s\n", "Operator +=");
         this->add(str);
     }
 
     //+
     friend String operator + (String str1, String str2);
-    
     //Cout OSTREAM
     friend std::ostream& operator << (std::ostream& out, String& str);
     //Cin ISTREAM
@@ -173,37 +195,33 @@ public:
 };
 
 std::ostream& operator << (std::ostream& out, String& str) {
+    printf("%s\n", "Operator <<");
     out << str.c_str();
     return out;
 }
 std::istream& operator >> (std::istream& out, String& str) {
+    printf("%s\n", "Operator >>");
     out >> str.c_str();
     str.size = strlen(str.c_str());
     return out;
 }
 
 String operator + (String str1, String str2) {
-    String temp = str1;
-    temp.add(str2);
-    return temp;
+    printf("%s\n", "Operator +");
+    str1.add(str2);
+    return str1;
 }
+
+
 
 int main()
 {
 
-    Allocator allocator;
-
-    char* arr = allocator.allocate(10000000000000);
-
-
     String a("HELLO");
-    String b = a;
-    b += " WORLD " +  a + "HELLO" + "dadsa";
-    b += " WORLD";
+    String b;
+    b = a;
     printf("%s %zd %zd %zd\n", b.c_str(), b.capacity(), b.length(), sizeof(b));
-    
-    std::cin >> b;
-
+    b += " WORLD " + a + "HELLO";
     printf("%s %zd %zd %zd\n", b.c_str(), b.capacity(), b.length(), sizeof(b));
 
 
