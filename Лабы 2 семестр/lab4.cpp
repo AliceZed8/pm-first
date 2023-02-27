@@ -1,17 +1,17 @@
 #include <iostream>
-
-#define BAD_ALLOC(ptr) { if (ptr == nullptr) {std::cerr << "Bad Alloc"; exit(-1);} };
+#include <type_traits>
+#define BAD_ALLOC(ptr) {if (ptr == nullptr) {std::cerr << "Bad Alloc"; exit(-1);}};
 #define LOG(str) printf("%s\n", str);
 
 
 template <typename Type>
 class Matrix {
     Type** matrix;
-    uint64_t s, n;
+    size_t s, n;
 
     Type Det(Type** mtx, size_t rows, size_t cols) {
         if (rows != cols) return 0;
-        
+
         switch (rows) {
         case 2: {
             return mtx[0][0] * mtx[1][1] - mtx[0][1] * mtx[1][0];
@@ -25,11 +25,7 @@ class Matrix {
                 minor[i] = new Type[cols - 1];
                 BAD_ALLOC(minor[i])
             }
-
             for (i = 0; i < cols; i++) {
-                
-
-
                 for (j = 1; j < rows; j++) {
                     uint64_t step = 0;
                     for (k = 0; k < cols; k++) {
@@ -40,11 +36,10 @@ class Matrix {
                     }
                 }
 
-
                 res += std::pow(-1, i) * mtx[0][i] * Det(minor, rows - 1, cols - 1);
             }
-            
-           
+
+
             for (i = 0; i < rows - 1; i++)
                 delete[] minor[i];
             delete[] minor;
@@ -69,20 +64,26 @@ public:
 
     //constructors
     template <typename elem_type>
-    Matrix(elem_type s, elem_type n):
-        s(s), n(n) {
+    Matrix(elem_type s, elem_type n) {
+        static_assert(
+            std::is_unsigned_v<elem_type> && std::is_integral_v<elem_type>,
+            "Err"
+            );
+
+        this->s = s;
+        this->n = n;
         LOG("Constructor SxN");
         matrix = new Type * [s];
         BAD_ALLOC(matrix);
         for (uint64_t i = 0; i < s; i++) {
             matrix[i] = new Type[n];
             BAD_ALLOC(matrix[i]);
-            memset((void*) matrix[i], 0, sizeof(Type) * n);
-        }  
+            memset((void*)matrix[i], 0, sizeof(Type) * n);
+        }
     }
 
     template <size_t rows, size_t cols>
-    Matrix(const Type (&mtx) [rows][cols]): s(rows), n(cols)
+    Matrix(const Type(&mtx)[rows][cols]) : s(rows), n(cols)
     {
         LOG("Constructor arr[][]");
         matrix = new Type * [s];
@@ -90,18 +91,18 @@ public:
         for (uint64_t i = 0; i < s; i++) {
             matrix[i] = new Type[n];
             BAD_ALLOC(matrix[i]);
-            memcpy((void*) matrix[i], (void*) mtx[i], sizeof(mtx[i]));
+            memcpy((void*)matrix[i], (void*)mtx[i], sizeof(mtx[i]));
         }
     }
 
-    Matrix(const Matrix<Type>& mtx): s(mtx.s), n(mtx.n) {
+    Matrix(const Matrix<Type>& mtx) : s(mtx.s), n(mtx.n) {
         LOG("Copy Constructor");
-        matrix = new Type*[mtx.s];
+        matrix = new Type * [mtx.s];
         BAD_ALLOC(matrix);
         for (uint64_t i = 0; i < s; i++) {
             matrix[i] = new Type[n];
             BAD_ALLOC(matrix[i]);
-            memcpy((void*)(matrix[i]), (void*)(mtx[i] ), sizeof(Type)*n);
+            memcpy((void*)(matrix[i]), (void*)(mtx[i]), sizeof(Type) * n);
         }
     }
 
@@ -125,7 +126,7 @@ public:
         }
         return;
     }
-    
+
     Matrix<Type> operator++() {
         for (uint64_t i = 0; i < s; i++) {
             for (uint64_t j = 0; j < n; j++) {
@@ -149,7 +150,7 @@ public:
         uint64_t i;
 
         //new matrix**
-        matrix = new Type*[s];
+        matrix = new Type * [s];
         BAD_ALLOC(matrix);
 
         for (i = 0; i < s; i++) {
@@ -199,7 +200,7 @@ public:
         if (matrix != nullptr) delete[] matrix;
     }
 
-  
+
     template <typename elem_type>
     Type* operator[](elem_type i) const {
         return matrix[i];
@@ -223,10 +224,11 @@ public:
         for (uint64_t i = 0; i < matrix.GetS(); i++) {
             for (uint64_t j = 0; j < matrix.GetN(); j++) {
                 stream >> matrix[i][j];
-            }}
+            }
+        }
         return stream;
     }
-    
+
 };
 
 int main()
@@ -240,7 +242,11 @@ int main()
         {27, 24, 32, 27, 237, 19}
     };
     Matrix<int64_t> matrix1(mtx2);
-  
+    /*
+    unsigned int x = 1;
+    unsigned int y = 1;
+    Matrix<uint32_t> matrix2(x, y);*/
     std::cout << matrix1;
     std::cout << matrix1.GetDet() << std::endl;
 }
+
