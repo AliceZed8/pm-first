@@ -80,6 +80,7 @@ public:
 
             if (checkPoint(x, y)) vector.push_back({ x0 + (x), y0 - (y) });
         }
+
         for (float x = posx - r; x <= posx + r ; x += 0.3f) {
             float y = -std::sqrt(r * r - std::pow((x - posx), 2)) + posy;
 
@@ -223,7 +224,7 @@ int main() {
         //Следующая точка
         k++;
 
-        for (auto elem : buffer) window.draw(elem);
+        for (const auto& elem : buffer) window.draw(elem);
 
         if (ok && !pause) {
             point.setPosition(pnt.x, pnt.y);

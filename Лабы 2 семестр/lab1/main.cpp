@@ -80,14 +80,15 @@ int main() {
 
         window.draw(text);
         window.display();
-
+        /*
+        
         int frame_duration = clock.getElapsedTime().asMilliseconds();
         int time_to_sleep = int(1000.f / want_fps) - frame_duration;
         if (time_to_sleep > 0) {
             sf::sleep(sf::milliseconds(time_to_sleep));
         }
         clock.restart();
-
+        */
     }
 
     return 0;

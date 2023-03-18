@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_definitions(-DSFML_STATIC)
 
+
+
 include_directories("SFML/include/")
 link_directories("SFML/lib/")
 
