@@ -212,6 +212,7 @@ using socket_t = int;
 #include <functional>
 #include <iomanip>
 #include <iostream>
+#include <stdio.h>
 #include <list>
 #include <map>
 #include <memory>
